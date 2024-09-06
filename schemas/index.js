@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// .env 파일의 내용을 불러옵니다.
+dotenv.config();
 
 const connect = () => {
   mongoose
-    .connect(
-      // 빨간색으로 표시된 부분은 대여한 ID, Password, 주소에 맞게끔 수정해주세요!
-      'mongodb+srv://sparta-user:aaaa4321@express-mongo.3wiab.mongodb.net/?retryWrites=true&w=majority&appName=express-mongo',
-      {
-        dbName: 'todo_memo', // todo_memo 데이터베이스명을 사용합니다.
-      }
-    )
+    .connect(process.env.MONGODB_URI, {
+      dbName: 'todo_memo', // todo_memo 데이터베이스명을 사용합니다.
+    })
     .then(() => console.log('MongoDB 연결에 성공하였습니다.'))
     .catch((err) => console.log(`MongoDB 연결에 실패하였습니다. ${err}`));
 };
